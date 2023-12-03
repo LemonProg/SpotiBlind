@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpotiBlind</title>
+    <link href="../dist/output.css" rel="stylesheet">
+</head>
+<body class="min-h-screen grid place-content-center" style="background: linear-gradient(191deg, #25322A 0%, #141414 54.17%);">
+    <div class="text-center">
+        <img src="../src/LOGO.svg" alt="SpotiBlind">
+        <div class="flex place-content-center place-items-center mt-1 gap-4">
+            <div class="w-[55px] h-[7px] bg-white rounded-[7px]"></div>
+            <button class="text-white font-spotify bg-[#568A6B] w-[120px] h-[50px] rounded-[20px] text-xl font-medium " id="mainBtn">Jouer</button>
+            <div class="w-[55px] h-[7px] bg-white rounded-[7px]"></div>
+        </div>
+    </div>
+    <div class="fixed bottom-4 text-center min-w-full">
+        <span class="text-white font-spotify text-[14px]">Besoin d'aide?</span>
+    </div>
+    <script>
+        const mainBtn = document.querySelector('#mainBtn');
+        mainBtn.addEventListener('click', () => {
+            window.location.href = '/login';
+        })
+    </script>
+</body>
+</html>

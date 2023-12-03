@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpotiBlind</title>
+    <script src="../script.js" defer></script>
+    <link rel="stylesheet" href="../dist/output.css">
+</head>
+<body class="bg-[#141414]">
+    <!-- Playlist Choose Section -->
+    <section id="playlists-section">
+        <div class="fixed top-[60px] text-center min-w-full">
+            <h1 class="font-spotify text-[23px] text-white" id="h1Playlist">Sélectionner une Playlist</h1>
+        </div>
+    
+        <div class="min-h-screen grid place-content-center mt-[180px] mb-7">
+            <div class="grid grid-cols-2 gap-7" id="playlistPosters">
+                <div class="playlist" id="liked_song">
+                    <img src="../src/liked_song.jpg" class="w-[146px] object-cover h-[146px] opacity-50">
+                    <h2 class="text-white font-spotify text-center mt-2 opacity-50">Titres Likés</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Section -->
+    <section class="hidden" id="main-section">
+        <div class="grid place-items-center gap-5 mb-10">
+            <h2 id="playlist-name" class="text-white text-2xl font-spotify text-center"></h2>
+            <img id="playlist-img" class="w-[300px] h-[300px] object-cover">
+        </div>
+
+        <div class="grid gap-5 mb-5 place-content-center">
+            <input type="text" id="input-title" class="text-center bg-[#242424] text-xl p-3 rounded-[13px] font-spotify text-white focus:outline-none" spellcheck="false" placeholder="Titre">
+            <input type="text" id="input-artist" class="text-center bg-[#242424] text-lg p-3 rounded-[13px] font-spotify text-white border-none focus:outline-none" spellcheck="false" placeholder="Artiste">
+        </div>
+
+        <div class="grid place-content-center mt-10">
+            <button id="verify_btn" class="text-white font-spotify bg-[#568A6B] w-[203px] h-[46px] rounded-[13px] text-[20px]">Vérifier</button>
+        </div>
+
+        <div class="mt-10">
+            <img src="../src/bottom-indicator/blank.svg" id="blank_indicator" class="ml-2">
+            <img src="../src/bottom-indicator/1_error.svg" class="hidden ml-2" id="one_error_indicator">
+            <img src="../src/bottom-indicator/2_error.svg" class="hidden ml-2" id="two_error_indicator">
+            <img src="../src/bottom-indicator/3_error.svg" class="hidden ml-2" id="three_error_indicator">
+            <img src="../src/bottom-indicator/first_shot.svg" class="hidden ml-2" id="first_shot_indiactor">
+            <img src="../src/bottom-indicator/snd_shot.svg" class="hidden ml-2" id="snd_shot_indicator">
+            <img src="../src/bottom-indicator/trd_shot.svg" class="hidden ml-2" id="trd_shot_indicator">
+        </div>
+    </section>
+</body>
+</html>
