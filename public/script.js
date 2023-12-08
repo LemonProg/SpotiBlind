@@ -96,7 +96,10 @@ fetchAPI(token, "https://api.spotify.com/v1/me/playlists", "GET").then(response 
                 main_section.classList.remove('hidden')
 
                 // Update Main Page
-                playlist_name.textContent = name;
+                if (playlist.name.length >= 20) {
+                    playlist.name = playlist.name.slice(0, 20) + "..."
+                }
+                playlist_name.textContent = playlist.name;
                 playlist_img.src = poster
                 playlist_poster = poster;
 
