@@ -149,6 +149,10 @@ function verifyEvent() {
             response_title = response_title.replace(/\(.*?\)/g, "");
             response_title = response_title.trim();
         }
+        if (response_title.includes("[")) {
+            response_title = response_title.replace(/\[.*?\]/g, "");
+            response_title = response_title.trim();
+        }
         if (response_title.includes("-")) {
             array = response_title.split('-')
             response_title = array[0]
@@ -177,7 +181,6 @@ function verifyEvent() {
             input_artist.className = "text-center bg-[#242424] text-xl p-3 rounded-[13px] font-spotify text-white focus:outline-none border-4 border-[#568A6B]"
         } else {
             correct_artist = false;
-            console.log("trop nul mais je t'aime mbbb");
             // Add border red color
             input_artist.className = "text-center bg-[#242424] text-xl p-3 rounded-[13px] font-spotify text-white focus:outline-none border-4 border-[#EF5757]"
         }
