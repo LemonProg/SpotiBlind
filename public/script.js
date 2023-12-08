@@ -47,7 +47,13 @@ fetchAPI(token, "https://api.spotify.com/v1/me/playlists", "GET").then(response 
     const playlistPosters = document.querySelector('#playlistPosters')
 
     playlists.forEach(playlist => {
-        let poster = playlist.images[0].url;
+        let poster;
+        try {
+            poster = playlist.images[0].url;
+          } catch {
+            poster = "https://i.pinimg.com/1200x/04/54/bf/0454bf6aa9d73d317769a5efcca3e958.jpg";
+          }
+        
         let name = playlist.name;
         let id = playlist.id;
         
