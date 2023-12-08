@@ -174,11 +174,16 @@ function verifyEvent() {
         }
         
         // VERIFY ARTIST
-        let response_artist = data.currently_playing.album.artists[0].name.toLowerCase();
-        let answer_artist = input_artist.value.toLowerCase();
+        let response_artist = data.currently_playing.artists;
+        let answer_artist = input_artist.value.toLowerCase().trim()
+        
+        let artists_array = []
+        response_artist.forEach(artist => {
+            artists_array.push(artist.name.toLowerCase());
+        });
 
         var correct_artist = false;
-        if (answer_artist === response_artist) {
+        if (artists_array.includes(answer_artist)) {
             correct_artist = true;
             // Add border green color
             input_artist.className = "text-center bg-[#242424] text-xl p-3 rounded-[13px] font-spotify text-white focus:outline-none border-4 border-[#568A6B]"
