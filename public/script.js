@@ -144,8 +144,8 @@ function verifyEvent() {
     fetchAPI(token, 'https://api.spotify.com/v1/me/player/queue', 'GET').then(response => response.json())
     .then(data => {
         // VERIFY TITLE
-        let answer_title = input_title.value.toLowerCase();
-        let response_title = data.currently_playing.name.toLowerCase();
+        let answer_title = input_title.value.toLowerCase().replace(/\s/g, "");
+        let response_title = data.currently_playing.name.toLowerCase().replace(/\s/g, "");
         let img = data.currently_playing.album.images[1].url
 
         if (response_title.includes("(")) {
@@ -238,6 +238,7 @@ function verifyEvent() {
 
                 input_title.value = data.currently_playing.name;
                 input_artist.value = data.currently_playing.album.artists[0].name;
+                playlist_img.src = img;
 
                 verify_btn.removeEventListener('click', verifyEvent);
                 verify_btn.addEventListener('click', clickHandler);
