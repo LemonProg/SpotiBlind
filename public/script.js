@@ -230,6 +230,9 @@ function verifyEvent() {
                 three_error_indicator.classList.remove('hidden')
                 verify_btn.textContent = "Suivant"
 
+                input_title.value = data.currently_playing.name;
+                input_artist.value = data.currently_playing.album.artists[0].name;
+
                 verify_btn.removeEventListener('click', verifyEvent);
                 verify_btn.addEventListener('click', clickHandler);
             }
