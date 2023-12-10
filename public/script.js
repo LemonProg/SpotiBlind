@@ -27,11 +27,11 @@ const liked_song_div = document.querySelector('#liked_song');
 fetchAPI(token, "https://api.spotify.com/v1/me/tracks?limit=50", "GET").then(response => response.json())
 .then(data => {
     let ids = data.items;
-    var ids_array = [];
+    ids_liked_array = [];
     ids.forEach(data => {
-        ids_array.push(data.track.id)
-        ids_array = ids_array.sort((a, b) => 0.5 - Math.random());
+        ids_liked_array.push(data.track.id)
     });
+    ids_liked_array = ids_liked_array.sort((a, b) => 0.5 - Math.random());
 })
 
 var playlist_poster;
@@ -282,7 +282,7 @@ function clickHandler() {
     fetchAPI(token, 'https://api.spotify.com/v1/me/player/next', 'POST').then(() => {
         input_title.className = "text-center bg-[#242424] text-xl p-3 rounded-[13px] font-spotify text-white focus:outline-none"
         input_artist.className = "text-center bg-[#242424] text-xl p-3 rounded-[13px] font-spotify text-white focus:outline-none"
-    
+        
         input_title.value = "";
         input_artist.value = "";
     })
