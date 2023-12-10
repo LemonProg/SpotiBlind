@@ -171,6 +171,9 @@ function verifyEvent() {
             response_title = array[0]
             response_title = response_title.trim();
         }
+        if (response_title.includes(",")) {
+            response_title = response_title.replace(/,/g, "");
+        }
 
         var correct_title = false;
         if (answer_title == response_title) {
