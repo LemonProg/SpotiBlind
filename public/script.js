@@ -22,9 +22,6 @@ function fetchAPI(token, endpoint, method) {
     return fetch(url, options);
 }
 
-// PUT SHUFFLE
-// fetchAPI(token, 'https://api.spotify.com/v1/me/player/shuffle?state=true', "PUT")
-
 // WORK IN PROGRESS
 const liked_song_div = document.querySelector('#liked_song');
 fetchAPI(token, "https://api.spotify.com/v1/me/tracks?limit=50", "GET").then(response => response.json())
@@ -42,8 +39,15 @@ var playlist_poster;
 // Show Playlists
 fetchAPI(token, "https://api.spotify.com/v1/me/playlists", "GET").then(response => response.json())
 .then(data => {
-    const playlists = data.items;
+    // Pause eventual song
+    fetchAPI(token, "https://api.spotify.com/v1/me/player", "GET").then(response => response.json())
+    .then(player => {
+        if(player.is_playing) {
+            fetchAPI(token, "https://api.spotify.com/v1/me/player/pause", "PUT")
+        }
+    })
 
+    const playlists = data.items;
     const playlistPosters = document.querySelector('#playlistPosters')
 
     playlists.forEach(playlist => {
