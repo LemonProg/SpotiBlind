@@ -22,6 +22,12 @@ function fetchAPI(token, endpoint, method) {
     return fetch(url, options);
 }
 
+var playlist_poster;
+var isLiked = false;
+var ids_liked_index = 0;
+const playlist_section = document.querySelector('#playlists-section')
+const main_section = document.querySelector('#main-section')
+
 // WORK IN PROGRESS
 const liked_song_div = document.querySelector('#liked_song');
 fetchAPI(token, "https://api.spotify.com/v1/me/tracks?limit=50", "GET").then(response => response.json())
@@ -30,11 +36,30 @@ fetchAPI(token, "https://api.spotify.com/v1/me/tracks?limit=50", "GET").then(res
     ids_liked_array = [];
     ids.forEach(data => {
         ids_liked_array.push(data.track.id)
+        ids_liked_array = ids_liked_array.sort((a, b) => 0.5 - Math.random());
     });
-    ids_liked_array = ids_liked_array.sort((a, b) => 0.5 - Math.random());
-})
 
-var playlist_poster;
+    liked_song_div.addEventListener('click', () => {
+        isLiked = true;
+        // PUT NEXT SONG TO QUEUE
+        fetchAPI(token, "https://api.spotify.com/v1/me/player/queue?uri=spotify:track:" + ids_liked_array[ids_liked_index], "POST").then(() => {
+            // Hide playlists section
+            playlist_section.className = "hidden"
+            main_section.classList.remove('hidden')
+
+            // Update Main Page
+            playlist_name.textContent = "Titres Likés";
+            playlist_img.src = "src/liked_song.jpg";
+            playlist_poster = "src/liked_song.jpg";
+
+            document.body.className = "min-h-screen grid place-content-center bg-[#141414]"
+
+            // PLAY THE SONG
+            fetchAPI(token, "https://api.spotify.com/v1/me/player/next", "POST")
+
+        })
+    })
+})
 
 // Show Playlists
 fetchAPI(token, "https://api.spotify.com/v1/me/playlists", "GET").then(response => response.json())
@@ -100,9 +125,7 @@ fetchAPI(token, "https://api.spotify.com/v1/me/playlists", "GET").then(response 
         
             fetch(url, options).then(() => {
                 // Hide playlists section
-                const playlist_section = document.querySelector('#playlists-section')
                 playlist_section.className = "hidden"
-                const main_section = document.querySelector('#main-section')
                 main_section.classList.remove('hidden')
 
                 // Update Main Page
@@ -278,6 +301,11 @@ function clickHandler() {
     trd_shot_indicator.classList.add('hidden');
 
     playlist_img.src = playlist_poster;
+
+    if (isLiked) {
+        ids_liked_index++;
+        fetchAPI(token, "https://api.spotify.com/v1/me/player/queue?uri=spotify:track:" + ids_liked_array[ids_liked_index], "POST")
+    }
 
     fetchAPI(token, 'https://api.spotify.com/v1/me/player/next', 'POST').then(() => {
         input_title.className = "text-center bg-[#242424] text-xl p-3 rounded-[13px] font-spotify text-white focus:outline-none"
