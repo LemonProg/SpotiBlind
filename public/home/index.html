@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#141414">
     <title>SpotiBlind</title>
     <link href="../dist/output.css" rel="stylesheet">
     <link rel="shortcut icon" href="../src/favicon.svg" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body class="min-h-screen grid place-content-center bg-[#141414]">
     <div class="text-center">
@@ -24,6 +26,10 @@
         mainBtn.addEventListener('click', () => {
             window.location.href = '/login';
         })
+
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register('sw.js')
+        }
     </script>
 </body>
 </html>
