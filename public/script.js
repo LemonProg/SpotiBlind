@@ -159,6 +159,7 @@ document.addEventListener("scroll", (event) => {
 const input_title = document.querySelector('#input-title');
 const input_artist = document.querySelector('#input-artist');
 const verify_btn = document.querySelector('#verify_btn');
+const skip_btn = document.querySelector('#skip_btn');
 
 const blank_indicator = document.querySelector('#blank_indicator')
 const one_error_indicator = document.querySelector('#one_error_indicator')
@@ -241,6 +242,8 @@ function verifyEvent() {
                 verify_btn.removeEventListener('click', verifyEvent);
                 verify_btn.addEventListener('click', clickHandler);
                 
+                skip_btn.disabled = true;
+
                 playlist_img.src = img;
                 verify_btn.textContent = "Suivant"
             } else if (count_error == 1) {
@@ -249,6 +252,8 @@ function verifyEvent() {
 
                 verify_btn.removeEventListener('click', verifyEvent);
                 verify_btn.addEventListener('click', clickHandler);
+
+                skip_btn.disabled = true;
 
                 playlist_img.src = img;
                 verify_btn.textContent = "Suivant"
@@ -259,6 +264,8 @@ function verifyEvent() {
                 verify_btn.removeEventListener('click', verifyEvent);
                 verify_btn.addEventListener('click', clickHandler);
 
+                skip_btn.disabled = true;
+
                 playlist_img.src = img;
                 verify_btn.textContent = "Suivant"
             }
@@ -267,10 +274,12 @@ function verifyEvent() {
             if (count_error == 1) {
                 blank_indicator.classList.add('hidden')
                 one_error_indicator.classList.remove('hidden')
+                skip_btn.disabled = true;
             }
             if (count_error == 2) {
                 one_error_indicator.classList.add('hidden')
                 two_error_indicator.classList.remove('hidden')
+                skip_btn.disabled = true;
             }
             if (count_error == 3) {
                 two_error_indicator.classList.add('hidden')
@@ -280,6 +289,8 @@ function verifyEvent() {
                 input_title.value = data.currently_playing.name;
                 input_artist.value = data.currently_playing.album.artists[0].name;
                 playlist_img.src = img;
+
+                skip_btn.disabled = true;
 
                 verify_btn.removeEventListener('click', verifyEvent);
                 verify_btn.addEventListener('click', clickHandler);
@@ -292,9 +303,27 @@ document.querySelector('#back_playlist_btn').addEventListener('click', () => {
     location.reload();
 })
 
+skip_btn.addEventListener('click', () => {
+    fetchAPI(token, 'https://api.spotify.com/v1/me/player/queue', 'GET').then(response => response.json())
+    .then(data => {
+        blank_indicator.classList.add('hidden')
+        three_error_indicator.classList.remove('hidden')
+        verify_btn.textContent = "Suivant"
+
+        input_title.value = data.currently_playing.name;
+        input_artist.value = data.currently_playing.album.artists[0].name;
+        playlist_img.src = data.currently_playing.album.images[1].url;
+
+        skip_btn.disabled = true;
+
+        verify_btn.removeEventListener('click', verifyEvent);
+        verify_btn.addEventListener('click', clickHandler);
+    });
+})
+
 function clickHandler() {
     count_error = 0;
-    verify_btn.textContent = "Vérifier"
+    verify_btn.textContent = "VERIFIER"
     blank_indicator.classList.remove('hidden');
     one_error_indicator.classList.add('hidden');
     two_error_indicator.classList.add('hidden');
@@ -322,4 +351,6 @@ function clickHandler() {
     // Remove the event listener after the click event
     verify_btn.removeEventListener('click', clickHandler);
     verify_btn.addEventListener('click', verifyEvent);
+
+    skip_btn.disabled = false;
 }

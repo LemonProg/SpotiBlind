@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>SpotiBlind</title>
     <script src="../script.js" defer></script>
     <link rel="stylesheet" href="../dist/output.css">
@@ -39,8 +39,9 @@
             <input type="text" id="input-artist" class="text-center bg-[#242424] text-lg p-3 rounded-[13px] font-spotify text-white border-none focus:outline-none" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Artiste">
         </div>
 
-        <div class="grid place-content-center mt-10">
-            <button id="verify_btn" class="text-white font-spotify bg-[#568A6B] w-[203px] h-[46px] rounded-[13px] text-[20px]">Vérifier</button>
+        <div class="flex place-content-center mt-10 gap-2">
+            <button id="verify_btn" class="text-white font-spotify bg-[#568A6B] w-[180px] h-[46px] rounded-[13px] text-[20px]">VALIDER</button>
+            <button id="skip_btn" class="disabled:opacity-50 text-white font-spotify bg-[#EF5757] w-[85px] h-[46px] rounded-[13px] text-[20px]">SKIP</button>
         </div>
 
         <div class="mt-10">
