@@ -129,8 +129,8 @@ fetchAPI(token, "https://api.spotify.com/v1/me/playlists", "GET").then(response 
                 main_section.classList.remove('hidden')
 
                 // Update Main Page
-                if (playlist.name.length >= 20) {
-                    playlist.name = playlist.name.slice(0, 20) + "..."
+                if (playlist.name.length >= 13) {
+                    playlist.name = playlist.name.slice(0, 13) + "..."
                 }
                 playlist_name.textContent = playlist.name;
                 playlist_img.src = poster
@@ -287,6 +287,10 @@ function verifyEvent() {
         }
     })
 }
+
+document.querySelector('#back_playlist_btn').addEventListener('click', () => {
+    location.reload();
+})
 
 function clickHandler() {
     count_error = 0;
