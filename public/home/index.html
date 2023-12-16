@@ -33,7 +33,9 @@
             if (result === "granted") {
                 navigator.serviceWorker.ready.then((registration) => {
                     setTimeout(() => {
-                        registration.showNotification("Spotify is started, Come play now!");
+                        registration.showNotification("Spotify is ready", {
+                            body: 'Comeback to play!'
+                        });
                     }, 1000)
                 });
             }
