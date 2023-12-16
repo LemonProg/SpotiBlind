@@ -32,14 +32,16 @@
             
             if (result === "granted") {
                 navigator.serviceWorker.ready.then((registration) => {
-                    registration.showNotification("Comeback to SpotiBlind");
+                    setTimeout(() => {
+                        registration.showNotification("Spotify is started, Come play now!");
+                    }, 1000)
                 });
             }
 
             setTimeout(() => {
                 window.location.href = '/login';
-            }, 1000)
-            
+            }, 500)
+
             location.assign("spotify:track:7wZnwgGkwpJ8EYJ6VEJD2A")
         })
     </script>
