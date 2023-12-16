@@ -28,16 +28,19 @@
 
         const mainBtn = document.querySelector('#mainBtn');
         mainBtn.addEventListener('click', async () => {
-            // window.location.href = '/login';
             const result = await window.Notification.requestPermission();
-
+            
             if (result === "granted") {
                 navigator.serviceWorker.ready.then((registration) => {
-                    registration.showNotification("Comeback to SpotiBlind", {
-                        body: "test"
-                    });
+                    registration.showNotification("Comeback to SpotiBlind");
                 });
             }
+
+            setTimeout(() => {
+                window.location.href = '/login';
+            }, 1000)
+            
+            location.assign("spotify:track:7wZnwgGkwpJ8EYJ6VEJD2A")
         })
     </script>
 </body>
