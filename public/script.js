@@ -172,6 +172,8 @@ const trd_shot_indicator = document.querySelector('#trd_shot_indicator')
 
 var count_error = 0;
 
+var player_score = 0;
+
 verify_btn.addEventListener('click', verifyEvent);
 
 function verifyEvent() {
@@ -246,6 +248,8 @@ function verifyEvent() {
 
                 playlist_img.src = img;
                 verify_btn.textContent = "Suivant"
+
+                player_score = player_score + 3
             } else if (count_error == 1) {
                 one_error_indicator.classList.add('hidden')
                 snd_shot_indicator.classList.remove('hidden')
@@ -257,6 +261,8 @@ function verifyEvent() {
 
                 playlist_img.src = img;
                 verify_btn.textContent = "Suivant"
+
+                player_score = player_score + 2
             } else if (count_error == 2) {
                 two_error_indicator.classList.add('hidden')
                 trd_shot_indicator.classList.remove('hidden')
@@ -268,6 +274,8 @@ function verifyEvent() {
 
                 playlist_img.src = img;
                 verify_btn.textContent = "Suivant"
+
+                player_score = player_score + 1
             }
         } else {
             count_error++;
@@ -294,8 +302,16 @@ function verifyEvent() {
 
                 verify_btn.removeEventListener('click', verifyEvent);
                 verify_btn.addEventListener('click', clickHandler);
+
+                if (correct_title && correct_artist === false) {
+                    player_score += 0.5
+                }
+                else if (correct_artist && correct_title === false) {
+                    player_score += 0.5
+                }
             }
         }
+        console.log(player_score);
     })
 }
 
